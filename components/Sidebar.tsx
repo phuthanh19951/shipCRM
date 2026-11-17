@@ -17,7 +17,7 @@ const SECTIONS = [
   {
     title: "KHÁCH HÀNG",
     items: [
-      { href: "#", label: "Khách hàng (shop)" },
+      { href: "/customers", label: "Khách hàng (shop)" },
       { href: "#", label: "Khiếu nại & ticket" },
       { href: "#", label: "Báo cáo" },
       { href: "#", label: "Cài đặt" },
@@ -29,6 +29,7 @@ function isActive(pathname: string, href: string) {
   if (href === "#") return false;
   if (href === "/") return pathname === "/";
   if (href === "/orders") return pathname.startsWith("/orders") && pathname !== "/orders/new";
+  if (href === "/customers") return pathname.startsWith("/customers");
   return pathname === href;
 }
 

@@ -79,6 +79,56 @@ export function buildTimeline(o: Order) {
   }));
 }
 
+export type CustomerTier = "thuong" | "bac" | "vang" | "kim_cuong";
+
+export const TIER: Record<CustomerTier, { label: string; badge: string }> = {
+  thuong: { label: "Thường", badge: "bg-gray-100 text-gray-700" },
+  bac: { label: "Bạc", badge: "bg-slate-100 text-slate-700" },
+  vang: { label: "Vàng", badge: "bg-amber-100 text-amber-800" },
+  kim_cuong: { label: "Kim cương", badge: "bg-sky-100 text-sky-800" },
+};
+
+export type CustomerStatus = "active" | "paused";
+
+export const CUSTOMER_STATUS: Record<CustomerStatus, { label: string; badge: string }> = {
+  active: { label: "Đang hoạt động", badge: "bg-green-100 text-green-800" },
+  paused: { label: "Tạm ngưng", badge: "bg-red-100 text-red-700" },
+};
+
+export type Customer = {
+  id: string;
+  name: string;
+  phone: string;
+  email: string;
+  address: string;
+  tier: CustomerTier;
+  status: CustomerStatus;
+  joinedAt: string;
+  totalOrders: number;
+  successRate: number;
+  codBalance: number;
+};
+
+export const CUSTOMERS: Customer[] = [
+  { id: "KH0001", name: "Shop Thời Trang Mộc", phone: "0909 123 456", email: "moc.shop@gmail.com", address: "210 Cộng Hòa, P.12, Tân Bình, TP.HCM", tier: "kim_cuong", status: "active", joinedAt: "02/03/2024", totalOrders: 1842, successRate: 94.6, codBalance: 48500000 },
+  { id: "KH0002", name: "Gia Dụng Nhà Lam", phone: "0918 772 034", email: "nhalam.giadung@gmail.com", address: "88 Trần Duy Hưng, Cầu Giấy, Hà Nội", tier: "vang", status: "active", joinedAt: "14/07/2024", totalOrders: 963, successRate: 91.2, codBalance: 21300000 },
+  { id: "KH0003", name: "Phụ Kiện Minh", phone: "0935 908 112", email: "minh.accessory@gmail.com", address: "21 Bạch Đằng, Hải Châu, Đà Nẵng", tier: "bac", status: "active", joinedAt: "28/11/2024", totalOrders: 418, successRate: 89.5, codBalance: 8600000 },
+  { id: "KH0004", name: "Shop Hoa Linh", phone: "0962 341 818", email: "hoalinh.shop@gmail.com", address: "33 Võ Văn Ngân, Thủ Đức, TP.HCM", tier: "thuong", status: "paused", joinedAt: "09/01/2025", totalOrders: 126, successRate: 82.1, codBalance: 2400000 },
+  { id: "KH0005", name: "Mẹ Bé Xinh Store", phone: "0944 556 712", email: "mebexinh.store@gmail.com", address: "12 Nguyễn Oanh, Gò Vấp, TP.HCM", tier: "vang", status: "active", joinedAt: "20/05/2024", totalOrders: 1105, successRate: 93.4, codBalance: 36700000 },
+  { id: "KH0006", name: "Nội Thất Hà An", phone: "0987 234 190", email: "haan.noithat@gmail.com", address: "19 Ba Tháng Hai, Ninh Kiều, Cần Thơ", tier: "bac", status: "active", joinedAt: "11/09/2024", totalOrders: 349, successRate: 88.7, codBalance: 15200000 },
+  { id: "KH0007", name: "Giày Dép Phong Cách", phone: "0909 882 341", email: "phongcach.giaydep@gmail.com", address: "56 Lạch Tray, Ngô Quyền, Hải Phòng", tier: "thuong", status: "paused", joinedAt: "03/02/2025", totalOrders: 72, successRate: 79.3, codBalance: 1150000 },
+  { id: "KH0008", name: "Đồ Chơi Vui Vẻ", phone: "0898 123 004", email: "vuive.dochoi@gmail.com", address: "7 Hùng Vương, TP. Huế", tier: "thuong", status: "active", joinedAt: "30/06/2025", totalOrders: 211, successRate: 85.9, codBalance: 4300000 },
+];
+
+export const findCustomer = (id: string) => CUSTOMERS.find((c) => c.id === id);
+export const customerOrders = (name: string) => ORDERS.filter((o) => o.shop === name);
+
+export const CUSTOMER_COUNTS: Record<CustomerStatus | "all", number> = {
+  all: CUSTOMERS.length,
+  active: CUSTOMERS.filter((c) => c.status === "active").length,
+  paused: CUSTOMERS.filter((c) => c.status === "paused").length,
+};
+
 export const CARE_NOTES = [
   { initials: "TL", who: "Thu Loan (CSKH)", when: "20:15, 17/11", text: "Đã gọi xác nhận, khách hẹn nhận hàng tối nay sau 21h tại nhà." },
   { initials: "HP", who: "Huỳnh Phát (shipper)", when: "19:30, 17/11", text: "Khách không nghe máy lần 1, sẽ gọi lại khi tới khu vực." },
