@@ -7,7 +7,7 @@ import { CUSTOMERS, CUSTOMER_COUNTS, CUSTOMER_STATUS, TIER, formatVND, type Cust
 type Tab = CustomerStatus | "all";
 const TABS: { id: Tab; label: string }[] = [
   { id: "all", label: "Tất cả" },
-  { id: "active", label: "Đang hoạt động" },
+  { id: "active", label: "Đang hoạt động " },
   { id: "paused", label: "Tạm ngưng" },
 ];
 
